@@ -1,0 +1,167 @@
+body {
+    font-family: Arial;
+    font-size: 13.3px;
+}
+
+.ui-dialog {
+    border: 1px solid grey;
+    background-color: #8cf;
+}
+
+.ui-dialog-buttonpane {
+    background-color: #7ad;
+    padding: 10px;
+}
+
+.ui-dialog-titlebar {
+    background-color: #7ad;
+    padding: 10px;
+}
+
+.ui-button-icon-only {
+    text-align: right;
+    float: right;
+}
+
+.ui-dialog-title, .ui-dialog-content {
+    padding: 5px;
+}
+
+.node {
+    background-color: green;
+    height: 78px;
+    width: 78px;
+    border: 2px solid green;
+    border-radius: 40px;
+}
+
+.node div {
+    text-align: center;
+    height: 20%;
+    padding: 40% 0 40% 0;
+    font-family: verdana;
+    color: white;
+    font-weight: bold;
+}
+
+#control-grid {
+    display: grid;
+    grid-template-columns: 900px;
+    grid-template-rows: 35px 720px;
+}
+
+#control-grid > div {
+    border: 2px solid blue;
+    border-radius: 2px;
+    margin: 2px;
+}
+
+#map-area {
+    display: grid;
+    grid-template-columns: repeat(9, 100px);
+    grid-template-rows: 80px 240px repeat(5, 80px);
+}
+
+.general-control, .centre-control {
+    background-color: #0d0;
+    width: 100px;
+}
+
+.centre-control {
+    display: none;
+}
+
+.parent-node {
+    grid-row: 1;
+    grid-column: 5;
+    width: 80px;
+    justify-self: center;
+}
+
+.centre-node {
+    grid-row: 3;
+    grid-column: 5;
+    width: 80px;
+    justify-self: center;
+}
+
+.child1 {grid-row: 3; grid-column: 9;}
+.child2 {grid-row: 4; grid-column: 8; left: 50px;}
+.child3 {grid-row: 5; grid-column: 7; left: 80px;}
+.child4 {grid-row: 6; grid-column: 6; left: 60px;}
+.child5 {grid-row: 7; grid-column: 5; top: -50px}
+.child6 {grid-row: 6; grid-column: 4; left: -60px;}
+.child7 {grid-row: 5; grid-column: 3; left: -80px;}
+.child8 {grid-row: 4; grid-column: 2; left: -50px;}
+.child9 {grid-row: 3; grid-column: 1;}
+
+#map-area > div {
+    position: relative;
+}
+
+#buttons {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#buttons input {
+    text-align: center;
+    margin: 2px;
+}
+
+.pos2 {
+    grid-row: 2;
+}
+
+.dialog {
+    display: none;
+}
+
+.label {
+    text-align: right;
+    background-color: #7ad;
+}
+
+.dialog-grid {
+    display: grid;
+    grid-template-columns: 100px 200px;
+    grid-template-rows: repeat(3, 30px) 200px;
+}
+
+#create-node-grid {
+
+}
+
+.field {
+    border-radius: 3px;
+    align-self: center;
+    padding: 5px;
+}
+
+#create-node-dialog select {
+    width: 130px;
+}
+
+.selected {
+    border: 2px solid #00c;
+}
+
+#node-detail-grid {
+
+}
+
+#detailDesc, #newNodeDesc {
+    grid-column: span 2;
+    text-align: unset;
+    justify-self: left;
+    padding: 5px;
+}
+
+#detailDesc textarea, #newNodeDesc textarea {
+    resize: none;
+}
+
+.pos-top-row {
+    grid-row: 1;
+    z-index: 2;
+}

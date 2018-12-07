@@ -1,0 +1,33 @@
+.menu-outer {
+    background-color: #eee;
+    width: 200px;
+    border: 1px solid #aaa;
+    display: none;
+}
+
+.menu-item {
+    margin: 1px;
+    padding: 3px;
+    padding-left: 15px;
+}
+
+.menu-item:hover {
+    background-color: #7bf;
+}
+
+.menu-button {
+    width: 100px;
+    padding: 5px;
+    font-weight: bold;
+    background-color: #aaa;
+    text-align: center;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
