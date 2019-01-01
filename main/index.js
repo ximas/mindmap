@@ -1,32 +1,7 @@
 'use-strict';
+let pinned;
 
 $(document).ready (() => {
-    $('#create-node').click(() => {
-        newNodeDialog('create-node-dialog', false);
-        populateNodeDialog(false);
-    });
-
-    $('#create-child').click(() => {
-        newNodeDialog('create-node-dialog', true);
-        populateNodeDialog(true);
-    });
-
-    $('#node-details').click(() => {
-        detailDialog();
-        populateDetailDialog();
-    });
-    $('#remove-node').click(() => {
-        let centre = getCentreNode();
-        let newCentre = db.getWhere('Node', 'name', centre.parent)[0];
-        if (centre && centre.parent != 'rootNode') {
-            $('.node').parent().remove();
-            removeNode(centre.id);
-            updateDisplay(newCentre);
-        } else {
-            alert('Cannot remove root node');
-        }
-    });
-
     $('body').click(e => {generalClick(e)});
     $('.editable').focusout(e => {editField(e)});
 
@@ -34,7 +9,36 @@ $(document).ready (() => {
     $('#create-node').click();
 
     (new Menu('main-menu')).init();
+    pinned = new Menu('pinned-menu');
+    pinned.init();
 });
+
+function uiCreateNode() {
+    newNodeDialog('create-node-dialog', false);
+    populateNodeDialog(false);
+}
+
+function uiCreateChild() {
+    newNodeDialog('create-node-dialog', true);
+    populateNodeDialog(true);
+}
+
+function uiRemoveNode() {
+    let centre = getCentreNode();
+    let newCentre = db.getWhere('Node', 'name', centre.parent)[0];
+    if (centre && centre.parent != 'rootNode') {
+        $('.node').parent().remove();
+        removeNode(centre.id);
+        updateDisplay(newCentre);
+    } else {
+        alert('Cannot remove root node');
+    }
+}
+
+function uiNodeDetails() {
+    detailDialog();
+    populateDetailDialog();
+}
 
 function newNodeDialog(dialogId, isChild) {
     $('#' + dialogId).dialog({
@@ -67,7 +71,7 @@ function generalClick(e) {
         let container = jq.closest('.node').parent();
         let node = db.getWhere('Node', 'name', jq.html())[0];
         if (!container.hasClass('centre-node')) updateDisplay(node);
-        showCentreNodeControl();
+        $('.centre-node > div').addClass('selected');
     } else if (jq.attr('id') == 'map-area') {
         hideCentreNodeControl();
     }
@@ -140,8 +144,9 @@ function validateNode(node) {
 
 function displayNode(node, className) {
     let nodeInner = `<div>${node.name}</div>`;
-    let nodeElem = `<div id=${node.id} class=node >${nodeInner}</div>`
-    let container = `<div id=container${node.name} class=${className} >${nodeElem}</div>`
+    let nodeElem = `<div id=${node.id} class=node >${nodeInner}</div>`;
+    let container = $(`<div id=container${node.name} class=${className} >${nodeElem}</div>`);
+    container.dblclick(uiNodeDetails);
     $('#map-area').append(container);
 }
 
@@ -177,11 +182,6 @@ function clearPopup(id) {
     }
 }
 
-function showCentreNodeControl() {
-    $('.centre-node > div').addClass('selected');
-    $('.centre-control').show();
-}
-
 function hideCentreNodeControl() {
     $('.centre-node > div').removeClass('selected');
     $('.centre-control').hide();
@@ -198,17 +198,25 @@ function removeNode(id) {
     db.removeOne('Node', centre);
 }
 
-// make divs onclick?
+function pinNode() {
+    let centre = getCentreNode();
+    if (centre) {
+        pinned.add(centre.name);
+    }
+}
 
-// make menu list
-// second has pinned dialog
+// close all dropdowns before opening another
+// no duplicate pinned nodes
+// rework dialogues
+// put buttons in grid on dialogue
+// animation to show it's been pinned
+// click pinned node to center it
+// unpin button
+// search bar on top
+
 // - move dialogues in separate html file
 // - move server functions into new file?
-// third search?
 
-// add animation to selecting/creating nodes
-// add pinned functionality
-// add search functionality
 
 // fix that random bug with node parent repop
 // u r creating ids before validation

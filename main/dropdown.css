@@ -3,6 +3,7 @@
     width: 200px;
     border: 1px solid #aaa;
     display: none;
+    position: absolute;
 }
 
 .menu-item {
@@ -22,6 +23,11 @@
     background-color: #aaa;
     text-align: center;
 }
+
+.menu-container {
+    display: inline-block;
+}
+
 
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */

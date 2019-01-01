@@ -13,20 +13,23 @@
         <script type="text/javascript" src="dropdown.js"></script>
     </head>
     <body>
-        <div id='buttons' style='display: none;'>
-            <input type='button' class='general-control' id='create-node' value='create node'/>
-            <input type='button' class='centre-control' id='create-child' value='create child'/>
-            <input type='button' class='centre-control' id='remove-node' value='remove node'/>
-            <input type='button' class='centre-control' id='node-details' value='node details'/>
-        </div>
         <div id='control-grid'>
             <div class='pos-top-row'>
-                <div id='main-menu' name='Node Actions'>
-                    <div>
-                        <div>Create Node</div>
-                        <div>Create Child</div>
-                        <div>Remove Node</div>
-                        <div>Node Details</div>
+                <div>
+                    <div id='main-menu' name='Node Actions'>
+                        <div>
+                            <div onclick='uiCreateNode();'>Create Node</div>
+                            <div onclick='uiCreateChild();'>Create Child</div>
+                            <div onclick='uiRemoveNode();'>Remove Node</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id='pinned-menu' name='Pinned'>
+                        <div>
+                            <div>Pinned Node</div>
+                            <div>Pinned Node</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,6 +57,7 @@
                 <div class='field label'>node name</div>
                 <div class='field editable'><input id='detailName' name='name'/></div>
                 <div class='field label' id='detailDesc'><textarea rows='12' cols='35' readonly></textarea></div>
+                <div><input type='button' value='Pin' onclick='pinNode();'/></div>
             </div>
         </div>
     </body>
