@@ -15,22 +15,36 @@ function Menu(id) {
         button.addClass('menu-button noselect');
         button.html(button.attr('name'));
 
-        $(`#${id}`).click(this.toggle);
+        $(`#${id}`).click(this.show);
         $(`#menu-outer-${id}`).mouseleave(this.hide);
     }
-    this.toggle = () => {
-        $(`#menu-outer-${id}`).toggle();
+    this.show = () => {
+        $('.menu-outer').hide();
+        $(`#menu-outer-${id}`).show();
     }
     this.hide = () => {
         $(`#menu-outer-${id}`).hide();
     }
     this.add = (text, handler) => {
         let menu = $(`#${this.id}`).siblings('.menu-outer');
-        // check not already there
-        let elem = $('<div></div>').addClass('menu-item noselect').html(text).click(handler);
-        menu.append(elem);
+        if (!this.findListItem(text)) {
+            let elem = $('<div></div>').addClass('menu-item noselect').html(text).click((e) => {handler(e)});
+            menu.append(elem);
+        }
     }
     this.remove = text => {
-
+        let item = this.findListItem(text);
+        if (item) {
+            item.remove();
+        }
+    }
+    this.findListItem = text => {
+        let menu = $(`#${this.id}`).siblings('.menu-outer');
+        for (let elem of menu.children()) {
+            if ($(elem).html() == text) {
+                return $(elem);
+            }
+        }
+        return null;
     }
 }

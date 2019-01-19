@@ -201,17 +201,23 @@ function removeNode(id) {
 function pinNode() {
     let centre = getCentreNode();
     if (centre) {
-        pinned.add(centre.name);
+        if (pinned.findListItem(centre.name)) {
+            pinned.remove(centre.name);
+        } else {
+            pinned.add(centre.name, clickedPinned);
+        }
     }
 }
 
-// close all dropdowns before opening another
-// no duplicate pinned nodes
+function clickedPinned(e) {
+    let name = $(e.target).html();
+    let node = db.getWhere('Node', 'name', name)[0];
+    updateDisplay(node, false);
+}
+
 // rework dialogues
 // put buttons in grid on dialogue
 // animation to show it's been pinned
-// click pinned node to center it
-// unpin button
 // search bar on top
 
 // - move dialogues in separate html file
