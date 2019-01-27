@@ -28,7 +28,7 @@ function Menu(id) {
     this.add = (text, handler) => {
         let menu = $(`#${this.id}`).siblings('.menu-outer');
         if (!this.findListItem(text)) {
-            let elem = $('<div></div>').addClass('menu-item noselect').html(text).click((e) => {handler(e)});
+            let elem = $('<div></div>').addClass('menu-item noselect').html(text).click(handler);
             menu.append(elem);
         }
     }

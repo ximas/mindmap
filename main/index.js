@@ -11,6 +11,8 @@ $(document).ready (() => {
     (new Menu('main-menu')).init();
     pinned = new Menu('pinned-menu');
     pinned.init();
+
+    $('#search-box').keyup(updateSearch);
 });
 
 function uiCreateNode() {
@@ -204,23 +206,41 @@ function pinNode() {
         if (pinned.findListItem(centre.name)) {
             pinned.remove(centre.name);
         } else {
-            pinned.add(centre.name, clickedPinned);
+            pinned.add(centre.name, (e) => {
+                selectNode($(e.target).html());
+            });
         }
     }
 }
 
-function clickedPinned(e) {
-    let name = $(e.target).html();
-    let node = db.getWhere('Node', 'name', name)[0];
+function selectNode(val) {
+    let node = db.getWhere('Node', 'name', val)[0];
     updateDisplay(node, false);
 }
 
-// rework dialogues
-// put buttons in grid on dialogue
-// animation to show it's been pinned
-// search bar on top
+function updateSearch(e) {
+    let $elem = $(e.target);
+    let data = $elem.val();
+    let nodes = db.getWhere('Node', 'name', data);
+    let nameList = [];
+    for (let node of nodes) {
+        nameList.push(node.name);
+    }
+    $elem.autocomplete({
+      source: nameList,
+      select: (e) => {
+          selectNode($(e.target).val());
+      }
+    });
+}
+
+// animation to show node being pinned
+// db get like function for search
 
 // - move dialogues in separate html file
+// rework dialogues
+// put buttons in grid on dialogue
+
 // - move server functions into new file?
 
 
